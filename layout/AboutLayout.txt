@@ -1,0 +1,25 @@
+The layout file will contain the information for building the lighting model for the animation program and the simulation, and mapping the leds strips to their physical space.  The file is a json object that contains several parts for each led.  The parts as will change over time as we identify sections of the structure we want to ot be group together.
+ 
+The sections are as follows:
+
+-These are individual pieces
+strip - the single strip number
+point - x,y,z position in real physical space
+index - the number of the pixel in a single array  
+address - the address of the LEDscape controller controlling the strip
+-These are groupings of more than one strip making up a piece of the structre
+segment - the top and bottom strip together in a single 216 pixel vertical
+section - the 1/6 structure section a set of segments belongs to
+
+	{
+		"strip": "0",
+		"point": [
+			0,
+			0,
+			0
+		],
+		"index": 0,
+		"address": "10.0.0.32:7890",
+		"segment: 0",
+		"section:0"
+	},
