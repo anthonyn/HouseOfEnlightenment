@@ -7,8 +7,8 @@ This is still inprogress
 Mikes Simulator 
 https://github.com/lax4mike/house-of-enlightenment
 
-Costmos Lidar info
+Cosmos Lidar info
 https://github.com/MyNameIsCosmo/lidar_body_tracking
 
-Dews Cosmic Praise reor
+Dewbs Cosmic Praise reor
 https://github.com/Dewb/CosmicPraise
