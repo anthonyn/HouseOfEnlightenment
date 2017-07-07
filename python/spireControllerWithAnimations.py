@@ -15,7 +15,7 @@ First start the gl simulator using, for example, the included "wall" layout
 
 Then run this script in another shell to send colors to the simulator
 
-    python_clients/spatial_stripes_new.py --layout layouts/wall.json
+    python_clients/spatial_stripes.py --layout layouts/wall.json
 
 """
 
@@ -261,3 +261,41 @@ def colorFader(pixels):
 # def singlePixelSelector(xPos, yPos, color):
 #     pixels=[(0,0,0,)] * n_pixels
 #     pixels[(yPos * 30) + xPos] = color
+
+
+
+#-------------------------------------------------------------------------------
+# send pixels
+
+print '    sending pixels forever (control-c to exit)...'
+print
+
+
+n_pixels = len(coordinates)
+pixels=[(0,0,0,)] * n_pixels
+start_time = time.time()
+
+while True:
+    t = time.time() - start_time
+    if globalParams["effectIndex"] == 0:
+        pixels = [spatial_stripes(t, coord, ii, n_pixels) for ii, coord in enumerate(coordinates)]
+    if globalParams["effectIndex"] == 1:
+        pixels = clearPixels(pixels)
+    if globalParams["effectIndex"] == 2:
+        pixels = [gentle_glow(t, coord, ii, n_pixels) for ii, coord in enumerate(coordinates)]
+    if globalParams["effectIndex"] == 3:
+        pixels = colorFader(pixels)
+    if globalParams["effectIndex"] == 4:
+        pixels = clearPixels(pixels)
+    if globalParams["effectIndex"] == 5:
+        pixels = clearPixels(pixels)
+    client.put_pixels(pixels, channel=0)
+    time.sleep(1 / options.fps)
+
+# Orignal animation main loop
+# while True:
+#     #t = time.time() - start_time
+#     #pixels = [pixel_color(t, coord, ii, n_pixels) for ii, coord in enumerate(coordinates)]
+#     singlePixelSelector(globalParams["xPos"], globalParams["yPos"], globalParams["color"])
+#     client.put_pixels(pixels, channel=0)
+#     time.sleep(1 / options.fps)
